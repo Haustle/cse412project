@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model match{
+  id        Int @id @default(autoincrement())
+  gameId    String
+  league    String
+  blueTeam  String
+
+
+}
+
+model Champion {
+  id              Int @id @default(autoincrement())
+  name            String
+  attackRating    Int
+  attackSpeed     Int
+  defense         Int
+  magic           Int
+  difficulty      Int
+  hpStart         Int
+  hpPerLevel      Int
+}
+
+model ChampionTags {
+  id String @id
+  type String
+}
