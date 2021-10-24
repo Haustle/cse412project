@@ -1,14 +1,16 @@
-// import prisma from '../lib/prisma'
+
 import styles from '../styles/Home.module.css'
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { getChampionData, getMatchData } from '../data/index';
 import { PrismaClient } from '@prisma/client';
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      
-    </div>
-  )
+
+export default function Index() {
+    return (
+      <>
+        <div>Develop Heer</div>
+      </>
+    )
 }
 
 export async function getStaticProps(){
@@ -18,6 +20,7 @@ export async function getStaticProps(){
 
   // grabbing rows from champion table
   const champDB = await prisma.champion.findMany();
+
   
   // check to size of champion table
   if (champDB.length == 0){
