@@ -1,6 +1,7 @@
-import prisma from '../lib/prisma'
+// import prisma from '../lib/prisma'
 import styles from '../styles/Home.module.css'
 import { getChampionData, getMatchData } from '../data/index';
+import { PrismaClient } from '@prisma/client';
 
 export default function Home() {
   return (
@@ -12,19 +13,33 @@ export default function Home() {
 
 export async function getStaticProps(){
 
-  // we're getting all champions here
-  // we should be getting the matches
-  const feed = await prisma.champion.findMany();
+  // making prisma connection
+  const prisma = new PrismaClient()
 
-  // load the championData from csv
-  const champData = await getChampionData();
+  // grabbing rows from champion table
+  const champDB = await prisma.champion.findMany();
+  
+  // check to size of champion table
+  if (champDB.length == 0){
+    const champData = await getChampionData();
+
+    // adding champions to the database (INSERT)
+    champData.forEach(async (champ) => 
+      await prisma.champion.create({
+        data: {
+          title: champ.id,
+          content: 'im cute'
+        }
+      })
+    )
+  }
+  console.log(champDB)
+
+  // load the match from csv
   const matchData = await getMatchData();
 
-
-  console.log(`Number of champions: ${champData.length}`);
-  console.log(`Number of matches: ${matchData.length}`);
-  
-  // console.log(feed);
+  // close the prisma connection
+  await prisma.$disconnect()
 
   return {
     props: {
