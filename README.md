@@ -21,7 +21,13 @@ npx prisma studio
 npx prisma db push
 ```
 
-### Run after change schema
+## Run after change schema
 ```bash
 npx prisma generate
 ```
+
+## Example raw query w/ prisma
+```js
+const result = await prisma.$queryRaw`SELECT * FROM User WHERE email = ${email}
+```
+[more info](https://www.prisma.io/docs/concepts/components/prisma-client/raw-database-access)
