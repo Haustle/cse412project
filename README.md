@@ -20,3 +20,8 @@ npx prisma studio
 ```bash
 npx prisma db push
 ```
+
+### Run after change schema
+```bash
+npx prisma generate
+```
