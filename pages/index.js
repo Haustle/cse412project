@@ -1,9 +1,9 @@
 
 import styles from '../styles/Home.module.css'
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { getChampionData, getMatchData } from '../data/index';
+import { getMatchData } from '../data/index';
 import { PrismaClient } from '@prisma/client';
-
+import { createTeam, createMatch, createChampions } from '../lib/parseMatchData';
 
 export default function Index() {
     return (
@@ -18,28 +18,32 @@ export async function getStaticProps(){
   // making prisma connection
   const prisma = new PrismaClient()
 
-  // grabbing rows from champion table
-  const champDB = await prisma.champion.findMany();
-
-  
-  // check to size of champion table
-  if (champDB.length == 0){
-    const champData = await getChampionData();
-
-    // adding champions to the database (INSERT)
-    champData.forEach(async (champ) => 
-      await prisma.champion.create({
-        data: {
-          title: champ.id,
-          content: 'im cute'
-        }
-      })
-    )
-  }
-  console.log(champDB)
-
-  // load the match from csv
+  // dont delete this, think it may break program for some reason
   const matchData = await getMatchData();
+
+
+  // await prisma.team.deleteMany({})
+
+  // check size on team Table
+  const teamDB = await prisma.team.findMany();
+  if(teamDB.length == 0){
+    console.log('adding teams to Teams table...')
+    createTeam()
+  }
+
+  // check size on match db
+  const matchDB = await prisma.match.findMany();
+  if(matchDB.length == 0){
+    console.log('adding matches to Match table...')
+    createMatch()
+  }
+
+  // check size on Champions table
+  const champDB = await prisma.champion.findMany();
+  if(champDB.length == 0){
+    console.log('adding champions to table....')
+    createChampions();
+  }
 
   // close the prisma connection
   await prisma.$disconnect()
