@@ -10,10 +10,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Champion{
-  id        Int @default(autoincrement()) @id
-  title     String
-  content   String?
-  published Boolean @default(false)
+// Team table
+model Team{
+  teamName    String
+  matchID     String 
+  top         String
+  jungle      String
+  mid         String
+  adc         String
+  support     String
 
+  @@id([teamName, matchID]) 
+}
+
+// Champion table
+model Champion{
+  id          String
+  matchId     String
+  totalGold   Int
+  minionKills Int
+  kills       Int
+  deaths      Int
+  assists     Int
+  visionscore Int
+
+  @@id([id, matchId])
+}
+
+// Match table
+model Match{
+  matchId     String @id
+  redTeam     String
+  blueTeam    String
+  result      Int
 }
