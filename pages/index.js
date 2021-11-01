@@ -5,9 +5,10 @@ import { getMatchData } from '../data/index';
 import { PrismaClient } from '@prisma/client';
 import { createTeam, createMatch, createChampions } from '../lib/parseMatchData';
 
-export default function Index() {
+export default function Index({champs, teams, matches}) {
     return (
       <>
+        {champs.map((champ,i) => (<div>{champ.id} {i}</div>))}
         <div>Develop Heer</div>
       </>
     )
@@ -21,8 +22,6 @@ export async function getStaticProps(){
   // dont delete this, think it may break program for some reason
   const matchData = await getMatchData();
 
-
-  // await prisma.team.deleteMany({})
 
   // check size on team Table
   const teamDB = await prisma.team.findMany();
@@ -45,12 +44,18 @@ export async function getStaticProps(){
     createChampions();
   }
 
+  // await prisma.team.deleteMany({})
+  // await prisma.champion.deleteMany({})
+  // await prisma.match.deleteMany({})
+
   // close the prisma connection
   await prisma.$disconnect()
 
   return {
     props: {
-
+      champs: champDB,
+      mathes: matchDB,
+      teams: teamDB
     }
   }
 }
