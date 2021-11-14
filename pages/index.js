@@ -10,22 +10,29 @@ export default function Index({teams, matches}) {
   
     matches = matches.slice(1,10)
     return (
-      <>
-        {matches.map((match, i) => (
-          <div className="mb-50" key={match.matchId}>
-            <Match 
-              redTeam={match.redTeam} 
-              blueTeam={match.blueTeam} 
-              matchId={match.matchId} 
-              table={teams}/>
-            
-          </div>
-        ))}
-        
-        
-        <div>Develop Heer</div>
+      <div className="wrapper">
+        <div className="container">
+          {matches.map((match, i) => (
+            <div className="mb-50" key={match.matchId}>
+              <Match
+                redTeam={match.redTeam}
+                blueTeam={match.blueTeam}
+                matchId={match.matchId}
+                table={teams} />
 
+            </div>
+          ))}
+        </div>
+        
+        
         <style jsx>{`
+          .container{
+
+          }
+          .wrapper{
+            display: flex;
+            justify-content:center;
+          }
           .mr-20{
             margin-right: 20px;
           }
@@ -34,7 +41,7 @@ export default function Index({teams, matches}) {
             margin-bottom: 50px;
           }
         `}</style>
-      </>
+      </div>
     )
 }
 
