@@ -2,25 +2,26 @@ import { getMatchData } from '../data/index';
 import { PrismaClient } from '@prisma/client';
 import { createTeam, createMatch, createChampions } from '../lib/parseMatchData';
 
-export default function Index({champs, teams, matches}) {
-  console.log(matches)
+import { Match } from '../components/match';
+
+
+export default function Index({teams, matches}) {
+
+  
+    matches = matches.slice(1,10)
     return (
       <>
         {matches.map((match, i) => (
-          <div className="mb-50">
-            <div>
-              <span className="mr-20">{match.matchId}</span>
-            </div>
-
-            <div>
-              <span className="mr-20">{match.redTeam}</span>
-              <span className="mr-20">{match.blueTeam}</span>
-              <span className="mr-20">{match.result}</span>
-            </div>
+          <div className="mb-50" key={match.matchId}>
+            <Match 
+              redTeam={match.redTeam} 
+              blueTeam={match.blueTeam} 
+              matchId={match.matchId} 
+              table={teams}/>
             
           </div>
         ))}
-        {champs.map((champ,i) => (<div key={champ}>{champ.id} {i}</div>))}
+        
         
         <div>Develop Heer</div>
 
@@ -59,7 +60,7 @@ export async function getStaticProps(){
     console.log('adding matches to Match table...')
     createMatch()
   }
-  console.log(matchDB)
+  // console.log(matchDB)
   // check size on Champions table
   const champDB = await prisma.champion.findMany();
   if(champDB.length == 0){
