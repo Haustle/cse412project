@@ -139,7 +139,7 @@ export default function roleCount({teamDB}){
                 </thead>
                 <tbody>
                     {champList.map((champ,i) => (
-                        <tr>
+                        <tr key={champ.champ}>
                             <td>{champ.champ}</td>
                             <td>{champ.uses}</td>                    
                         </tr>

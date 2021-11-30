@@ -104,7 +104,7 @@ const SideWR = ({ teamDB, matchDB }) => {
         </thead>
         <tbody>
           {teamList.map((team, i) => (
-            <tr>
+            <tr key={team.team}>
               <td>{team.team}</td>
               <td>{team.bluewins}</td>
               <td>{team.bluelosses}</td>

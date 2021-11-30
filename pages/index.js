@@ -1,6 +1,6 @@
-import { getMatchData } from '../data/index';
+// import { getMatchData } from '../data/index';
 import { PrismaClient } from '@prisma/client';
-import { createTeam, createMatch, createChampions } from '../lib/parseMatchData';
+// import { createTeam, createMatch, createChampions } from '../lib/parseMatchData';
 
 import { Match } from '../components/match';
 
@@ -32,13 +32,14 @@ export default function Index({teams, matches}) {
           .wrapper{
             display: flex;
             justify-content:center;
+            margin-top: 100px;
           }
           .mr-20{
             margin-right: 20px;
           }
 
           .mb-50{
-            margin-bottom: 50px;
+            margin-bottom: 25px;
           }
         `}</style>
       </div>
@@ -51,7 +52,7 @@ export async function getStaticProps(){
   const prisma = new PrismaClient()
 
   // dont delete this, think it may break program for some reason
-  const matchData = await getMatchData();
+  // const matchData = await getMatchData();
 
 
   // check size on team Table
@@ -84,7 +85,7 @@ export async function getStaticProps(){
 
   return {
     props: {
-      champs: champDB,
+      // champs: champDB,
       matches: matchDB,
       teams: teamDB
     }

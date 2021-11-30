@@ -99,7 +99,7 @@ const Champ = ({ teamDB, matchDB }) => {
         </thead>
         <tbody>
           {champList.map((champ, i) => (
-            <tr>
+            <tr key={champ.champ}>
               <td>
                 <img
                   className="champ-img"
