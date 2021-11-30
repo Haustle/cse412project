@@ -73,51 +73,52 @@ const SideWR = ({ teamDB, matchDB }) => {
     }
   };
   return (
-    <>
-      <select onChange={changeSort}>
-        <option selected value="blue">
-          Blue
-        </option>
-        <option value="red">Red</option>
-      </select>
-      <table style={{ textAlign: "left" }}>
-        <thead style={{}}>
-          <th style={{ width: "30ch", paddingBottom: "50px" }}>Team Name</th>
-          <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
-            Blue Wins
-          </th>
-          <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
-            Blue Losses
-          </th>
-          <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
-            Blue Percentage
-          </th>
-          <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
-            Red Wins
-          </th>
-          <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
-            Red Losses
-          </th>
-          <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
-            Red Percentage
-          </th>
-        </thead>
-        <tbody>
-          {teamList.map((team, i) => (
-            <tr key={team.team}>
-              <td>{team.team}</td>
-              <td>{team.bluewins}</td>
-              <td>{team.bluelosses}</td>
-              <td>{team.bluepercentage}%</td>
-              <td>{team.redwins}</td>
-              <td>{team.redlosses}</td>
-              <td>{team.redpercentage}%</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+      <div>
+        <select onChange={changeSort}>
+          <option selected value="blue">
+            Blue
+          </option>
+          <option value="red">Red</option>
+        </select>
+        <table style={{ textAlign: "left" }}>
+          <thead style={{}}>
+            <th style={{ width: "30ch", paddingBottom: "50px" }}>Team Name</th>
+            <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
+              Blue Wins
+            </th>
+            <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
+              Blue Losses
+            </th>
+            <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
+              Blue Percentage
+            </th>
+            <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
+              Red Wins
+            </th>
+            <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
+              Red Losses
+            </th>
+            <th style={{ paddingBottom: "50px", paddingRight: "10px" }}>
+              Red Percentage
+            </th>
+          </thead>
+          <tbody>
+            {teamList.map((team, i) => (
+              <tr key={team.team}>
+                <td>{team.team}</td>
+                <td>{team.bluewins}</td>
+                <td>{team.bluelosses}</td>
+                <td>{team.bluepercentage}%</td>
+                <td>{team.redwins}</td>
+                <td>{team.redlosses}</td>
+                <td>{team.redpercentage}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      <style jsx>{`
+        <style jsx>{`
         tr:nth-child(even) {
           background-color: #393838;
         }
@@ -126,7 +127,9 @@ const SideWR = ({ teamDB, matchDB }) => {
           border: 1px solid #393838;
         }
       `}</style>
-    </>
+      </div>
+    </div>
+    
   );
 };
 
