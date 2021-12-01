@@ -8,7 +8,7 @@ import { Match } from '../components/match';
 export default function Index({teams, matches}) {
 
   
-    matches = matches.slice(1,10)
+    matches = matches.slice(1,50)
     return (
       <div className="wrapper">
         <div className="container">

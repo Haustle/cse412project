@@ -17,12 +17,12 @@ export const Match = ({ redTeam, blueTeam, matchId, table}) => {
                     {blueComp.map(champ => 
                         (<img className="champ-img" src={leagueChampPath(champ.name)}/>)
                     )}
-                    <div>{blueTeam}</div>
+                    <div style={{marginLeft: '15px'}}>{blueTeam}</div>
                 </div>
                 
                 
                 <div className="redTeam">
-                    <div>{redTeam}</div>
+                    <div style={{marginRight: '15px'}}>{redTeam}</div>
                     
                     {redComp.map(champ => 
                         (<img className="champ-img" src={leagueChampPath(champ.name)} />)
@@ -41,7 +41,12 @@ export const Match = ({ redTeam, blueTeam, matchId, table}) => {
                     width: 900px;
                     border-radius: 10px;
                     padding: 10px;
+                    cursor: pointer;
+                    transition: .2s all;
+                }
 
+                .match-wrapper:hover{
+                    transform: scale(1.05);
                 }
                 .champ-img{
                     border-radius: 50%;
